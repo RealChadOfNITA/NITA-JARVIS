@@ -1,0 +1,255 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #030b1c;
+  color: white;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+  background:
+    radial-gradient(ellipse at top, #102c61 0%, transparent 55%),
+    #030b1c;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+  padding: 38px;
+  border: 1px solid #1266c9;
+  border-radius: 18px;
+  background: rgba(5, 20, 46, 0.96);
+  box-shadow: 0 0 35px #0066ff22;
+}
+
+.logo {
+  text-align: center;
+  font-size: 55px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+h1 span {
+  color: #19aaff;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64bfff;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.welcome {
+  margin: 35px 0 22px;
+}
+
+.welcome h2 {
+  margin-bottom: 8px;
+}
+
+.welcome p,
+.switch {
+  color: #9cb3d5;
+  font-size: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 14px;
+  border: 1px solid #234b7e;
+  border-radius: 8px;
+  background: #091a35;
+  color: white;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #16aaff;
+}
+
+.login-button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #0875ed, #09b4ff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.switch button {
+  border: none;
+  background: none;
+  color: #22b5ff;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.security {
+  text-align: center;
+  margin-top: 28px;
+  color: #8ca9cb;
+  font-size: 12px;
+}
+
+.security span {
+  color: #00e69a;
+}
+
+footer {
+  margin-top: 35px;
+  color: #647d9e;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* NITA JARVIS STUDENT DASHBOARD */
+
+.dashboard {
+  width: min(100% - 32px, 950px);
+  margin: 45px auto;
+  padding: 30px;
+  background: #111c30;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.dashboard-header h1 span {
+  color: #3d9cff;
+}
+
+.dashboard-welcome {
+  margin: 35px 0 25px;
+}
+
+.dashboard-label {
+  color: #55aaff;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.dashboard-welcome h2 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.dashboard-welcome p {
+  color: #aab8cc;
+}
+
+.profile-card,
+.status-card {
+  background: #192840;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.profile-card h3,
+.status-card h3 {
+  margin-top: 0;
+}
+
+.profile-card p {
+  color: #c1ccda;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+.profile-card strong {
+  color: white;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.status-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.status-card p {
+  color: #ffca68;
+  font-weight: bold;
+}
+
+.status-card span {
+  color: #aab8cc;
+  font-size: 13px;
+}
+
+.logout-button {
+  background: transparent;
+  border: 1px solid #438fe8;
+  color: #ffffff;
+  padding: 11px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: #2375d1;
+}
+
+.dashboard-note {
+  color: #aab8cc;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 28px;
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .dashboard-welcome h2 {
+    font-size: 23px;
+  }
+}
