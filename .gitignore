@@ -27,3 +27,13 @@ dist-ssr
 !.env.example
 node_modules/
 dist/
+# Python files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
