@@ -52,8 +52,13 @@ TAMPER_CONFIRM_SECONDS = 2.0
 TAMPER_DIFF_THRESHOLD = 0.28
 TAMPER_TEXTURE_THRESHOLD = 18.0
 TAMPER_BRIGHTNESS_LOW = 22.0
-SUPABASE_URL = os.environ.get("NITA_SUPABASE_URL", "").strip().rstrip("/")
-SUPABASE_KEY = os.environ.get("NITA_SUPABASE_PUBLISHABLE_KEY", "").strip()
+# -------------------- SUPABASE CONFIGURATION --------------------
+# These settings are included in the application.
+# Students do not need to configure Windows environment variables.
+
+SUPABASE_URL = "https://nyebnefribxedujfzuqu.supabase.co"
+
+SUPABASE_KEY = "sb_publishable_KdXCmidLrvv53OktwBitFg_vrhqbYc3"
 
 # Windows: keep the system awake while monitoring (screen may still turn off).
 ES_CONTINUOUS = 0x80000000

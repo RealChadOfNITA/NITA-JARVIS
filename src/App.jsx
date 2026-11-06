@@ -1,8 +1,12 @@
+
 import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
 import "./App.css";
 
 function App() {
+  const DOWNLOAD_URL =
+    "https://github.com/RealChadOfNITA/NITA-JARVIS/releases/download/v1.0.0/NITA_JARVIS_main.exe";
+
   const [page, setPage] = useState("home");
   const [isRegister, setIsRegister] = useState(false);
   const [session, setSession] = useState(null);
@@ -290,13 +294,22 @@ function App() {
             <article className="service-card">
               <div className="service-icon blue-icon">◉</div>
               <span className="service-state state-pending">
-                SETUP PENDING
+                WINDOWS APPLICATION
               </span>
               <h3>Camera system</h3>
               <p>
-                Connect your Windows laptop app to begin room monitoring.
+                Download NITA JARVIS for Windows and connect your laptop
+                camera to your student account.
               </p>
-              <div className="service-foot">Windows app <span>→</span></div>
+              <a
+                className="button button-primary"
+                href={DOWNLOAD_URL}
+              >
+                Download for Windows ↓
+              </a>
+              <div className="service-foot">
+                Windows app <span>→</span>
+              </div>
             </article>
 
             <article className="service-card">
@@ -619,12 +632,20 @@ function App() {
               >
                 Get started →
               </button>
+
               <button
                 className="button button-outline button-large"
                 onClick={() => openAuth(false)}
               >
                 Student login
               </button>
+
+              <a
+                className="button button-outline button-large"
+                href={DOWNLOAD_URL}
+              >
+                Download for Windows ↓
+              </a>
             </div>
 
             <div className="hero-proof">
