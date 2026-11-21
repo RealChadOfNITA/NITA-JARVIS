@@ -1,0 +1,47 @@
+
+name: Build NITA JARVIS for macOS
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-macos:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install opencv-python customtkinter requests pillow pyinstaller supabase
+
+      - name: Build macOS application
+        run: |
+          pyinstaller --clean --noconfirm --windowed --onedir \
+            --name NITA_JARVIS \
+            --osx-bundle-identifier com.nitajarvis.app \
+            --add-data "public:public" \
+            NITA_JARVIS_main.py
+
+      - name: Package application
+        run: |
+          cd dist
+          hdiutil create -volname "NITA JARVIS" \
+            -srcfolder NITA_JARVIS.app \
+            -ov -format UDZO NITA_JARVIS_macOS.dmg
+
+      - name: Upload macOS installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: NITA-JARVIS-macOS
+          path: dist/NITA_JARVIS_macOS.dmg
