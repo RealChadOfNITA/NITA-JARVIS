@@ -4,8 +4,11 @@ import { supabase } from "./lib/supabase";
 import "./App.css";
 
 function App() {
-  const DOWNLOAD_URL =
+  const WINDOWS_DOWNLOAD_URL =
     "https://github.com/RealChadOfNITA/NITA-JARVIS/releases/download/v1.0.0/NITA_JARVIS_main.exe";
+
+  const MAC_DOWNLOAD_URL =
+    "https://github.com/RealChadOfNITA/NITA-JARVIS/releases/download/v1.0.1/NITA_JARVIS_macOS.dmg";
 
   const [page, setPage] = useState("home");
   const [isRegister, setIsRegister] = useState(false);
@@ -30,7 +33,9 @@ function App() {
 
     supabase.auth.getSession().then(({ data, error }) => {
       if (!mounted) return;
+
       if (error) setMessage(error.message);
+
       setSession(data?.session ?? null);
     });
 
@@ -38,6 +43,7 @@ function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
+
       if (newSession) setPage("dashboard");
     });
 
@@ -148,7 +154,6 @@ function App() {
         });
 
         if (error) throw error;
-        setMessage("");
       }
     } catch (error) {
       setMessage(error.message || "Something went wrong.");
@@ -177,6 +182,7 @@ function App() {
       setMessage("Your personal Telegram connection link is ready!");
     } catch (error) {
       console.error("Telegram connection error:", error);
+
       setMessage(
         error.message || "Could not create your Telegram connection link."
       );
@@ -220,6 +226,7 @@ function App() {
 
           <div className="topbar-actions">
             <span className="signed-in-label">STUDENT PORTAL</span>
+
             <button
               className="button button-outline button-small"
               onClick={handleLogout}
@@ -235,9 +242,11 @@ function App() {
               <p className="eyebrow">
                 <span className="live-dot" /> SECURE STUDENT PORTAL
               </p>
+
               <h1>
                 Welcome back, <span>{displayName}</span>
               </h1>
+
               <p className="muted">
                 Your room security overview, all in one place.
               </p>
@@ -255,6 +264,7 @@ function App() {
                   <p className="eyebrow">YOUR INFORMATION</p>
                   <h2>Hostel profile</h2>
                 </div>
+
                 <span className="panel-symbol">⌂</span>
               </div>
 
@@ -263,18 +273,22 @@ function App() {
                   <small>FULL NAME</small>
                   <strong>{profile?.full_name || displayName}</strong>
                 </div>
+
                 <div>
                   <small>HOSTEL</small>
                   <strong>{profile?.hostel || "Not available"}</strong>
                 </div>
+
                 <div>
                   <small>BLOCK</small>
                   <strong>{profile?.block_number || "Not available"}</strong>
                 </div>
+
                 <div>
                   <small>ROOM</small>
                   <strong>{profile?.room_number || "Not available"}</strong>
                 </div>
+
                 <div className="profile-email">
                   <small>EMAIL</small>
                   <strong>{session.user.email}</strong>
@@ -293,22 +307,36 @@ function App() {
           <section className="service-grid">
             <article className="service-card">
               <div className="service-icon blue-icon">◉</div>
+
               <span className="service-state state-pending">
-                WINDOWS APPLICATION
+                DESKTOP APPLICATION
               </span>
+
               <h3>Camera system</h3>
+
               <p>
-                Download NITA JARVIS for Windows and connect your laptop
-                camera to your student account.
+                Download NITA JARVIS for Windows or macOS and connect your
+                laptop camera to your student account.
               </p>
-              <a
-                className="button button-primary"
-                href={DOWNLOAD_URL}
-              >
-                Download for Windows ↓
-              </a>
+
+              <div className="download-options">
+                <a
+                  className="button button-primary"
+                  href={WINDOWS_DOWNLOAD_URL}
+                >
+                  Download for Windows ↓
+                </a>
+
+                <a
+                  className="button button-outline"
+                  href={MAC_DOWNLOAD_URL}
+                >
+                  Download for macOS ↓
+                </a>
+              </div>
+
               <div className="service-foot">
-                Windows app <span>→</span>
+                Windows and macOS <span>→</span>
               </div>
             </article>
 
@@ -328,6 +356,7 @@ function App() {
               </span>
 
               <h3>Telegram alerts</h3>
+
               <p>
                 Receive security notifications directly through Telegram.
               </p>
@@ -353,6 +382,7 @@ function App() {
                   >
                     Open your personal Telegram link
                   </a>
+
                   <small>
                     Link expires in 10 minutes and can only be used once.
                   </small>
@@ -362,14 +392,18 @@ function App() {
 
             <article className="service-card">
               <div className="service-icon green-icon">⌖</div>
+
               <span className="service-state state-pending">
                 WAITING FOR CAMERA
               </span>
+
               <h3>Motion detection</h3>
+
               <p>
-                Motion alerts become available when your Windows app is
+                Motion alerts become available when your desktop app is
                 connected and armed.
               </p>
+
               <div className="service-foot">
                 Monitoring inactive <span>·</span>
               </div>
@@ -383,8 +417,8 @@ function App() {
           )}
 
           <p className="dashboard-disclaimer">
-            Camera monitoring is not active from this website. Use the NITA
-            JARVIS Windows application to arm your room.
+            Camera monitoring is not active from this website. Open the NITA
+            JARVIS desktop application to arm your room.
           </p>
         </main>
 
@@ -424,6 +458,7 @@ function App() {
             <p className="eyebrow">
               <span className="live-dot" /> STUDENT ACCESS
             </p>
+
             <h1>
               {isRegister ? (
                 <>
@@ -439,10 +474,12 @@ function App() {
                 </>
               )}
             </h1>
+
             <p>
               Sign in to manage your NITA JARVIS account, connect Telegram
-              alerts and set up your Windows security app.
+              alerts and set up your Windows or macOS security app.
             </p>
+
             <div className="auth-trust">◇ Secure account access</div>
           </section>
 
@@ -451,7 +488,9 @@ function App() {
               <p className="eyebrow">
                 {isRegister ? "NEW STUDENT" : "STUDENT PORTAL"}
               </p>
+
               <h2>{isRegister ? "Create your account" : "Sign in"}</h2>
+
               <p>
                 {isRegister
                   ? "Enter your details to get started."
@@ -502,6 +541,7 @@ function App() {
                     <option value="" disabled>
                       Select hostel
                     </option>
+
                     <option value="RNT hostel">RNT hostel</option>
                     <option value="Aryabhatta hostel">
                       Aryabhatta hostel
@@ -550,6 +590,7 @@ function App() {
 
             <p className="auth-switch">
               {isRegister ? "Already registered?" : "New student?"}
+
               <button
                 onClick={() => {
                   setIsRegister(!isRegister);
@@ -597,6 +638,7 @@ function App() {
           >
             Student login
           </button>
+
           <button
             className="button button-primary button-small"
             onClick={() => openAuth(true)}
@@ -621,8 +663,8 @@ function App() {
 
             <p className="hero-description">
               A smarter way to keep an eye on your hostel room. Turn your
-              Windows laptop into a motion-aware security system and receive
-              alerts through Telegram.
+              Windows or macOS laptop into a motion-aware security system
+              and receive alerts through Telegram.
             </p>
 
             <div className="hero-actions">
@@ -642,16 +684,23 @@ function App() {
 
               <a
                 className="button button-outline button-large"
-                href={DOWNLOAD_URL}
+                href={WINDOWS_DOWNLOAD_URL}
               >
                 Download for Windows ↓
+              </a>
+
+              <a
+                className="button button-primary button-large"
+                href={MAC_DOWNLOAD_URL}
+              >
+                Download for macOS ↓
               </a>
             </div>
 
             <div className="hero-proof">
               <span>✦</span> Designed for student room security
               <i />
-              <span>⌁</span> Windows + Telegram
+              <span>⌁</span> Windows + macOS + Telegram
             </div>
           </div>
 
@@ -664,6 +713,7 @@ function App() {
                 <span>
                   <i className="live-dot" /> SYSTEM INTERFACE
                 </span>
+
                 <span className="scanner-status">STANDBY</span>
               </div>
 
@@ -672,6 +722,7 @@ function App() {
                   <div className="scanner-core">
                     N<span>J</span>
                   </div>
+
                   <div className="scan-line"></div>
                 </div>
               </div>
@@ -681,6 +732,7 @@ function App() {
                   <small>SECURITY MODE</small>
                   <b>READY TO CONFIGURE</b>
                 </span>
+
                 <span className="signal-bars">
                   <i />
                   <i />
@@ -697,18 +749,35 @@ function App() {
         </section>
 
         <section className="stats-strip">
-          <div><strong>01</strong><span>Student account</span></div>
-          <div><strong>02</strong><span>Windows app</span></div>
-          <div><strong>03</strong><span>Telegram alerts</span></div>
-          <div><strong>24/7</strong><span>When your device is running</span></div>
+          <div>
+            <strong>01</strong>
+            <span>Student account</span>
+          </div>
+
+          <div>
+            <strong>02</strong>
+            <span>Desktop app</span>
+          </div>
+
+          <div>
+            <strong>03</strong>
+            <span>Telegram alerts</span>
+          </div>
+
+          <div>
+            <strong>24/7</strong>
+            <span>When your device is running</span>
+          </div>
         </section>
 
         <section className="content-section" id="features">
           <div className="section-heading centered">
             <p className="eyebrow">BUILT FOR HOSTEL LIFE</p>
+
             <h2>
               Security, made <span>simple.</span>
             </h2>
+
             <p>
               One connected experience to help you monitor your room while
               you're away.
@@ -718,31 +787,40 @@ function App() {
           <div className="feature-grid">
             <article className="feature-card">
               <div className="feature-icon blue-icon">◉</div>
+
               <p className="feature-number">01 / CAMERA</p>
+
               <h3>Webcam monitoring</h3>
+
               <p>
-                Use your Windows laptop's webcam as the camera for your room
-                security setup.
+                Use your Windows or macOS laptop's webcam as the camera
+                for your room security setup.
               </p>
             </article>
 
             <article className="feature-card">
               <div className="feature-icon purple-icon">⌖</div>
+
               <p className="feature-number">02 / DETECTION</p>
+
               <h3>Motion awareness</h3>
+
               <p>
-                Get notified when the Windows app detects movement while your
-                room is armed.
+                Get notified when the desktop app detects movement while
+                your room is armed.
               </p>
             </article>
 
             <article className="feature-card">
               <div className="feature-icon green-icon">➤</div>
+
               <p className="feature-number">03 / ALERTS</p>
+
               <h3>Telegram notifications</h3>
+
               <p>
-                Connect your Telegram account to receive alerts from your own
-                security setup.
+                Connect your Telegram account to receive alerts from your
+                own security setup.
               </p>
             </article>
           </div>
@@ -751,15 +829,18 @@ function App() {
         <section className="how-section" id="how-it-works">
           <div className="how-copy">
             <p className="eyebrow">GET STARTED IN THREE STEPS</p>
+
             <h2>
               From setup to
               <br />
               <span>peace of mind.</span>
             </h2>
+
             <p>
-              Create your student account, connect your Telegram and set up
-              the Windows application.
+              Create your student account, connect your Telegram and set
+              up the Windows or macOS application.
             </p>
+
             <button
               className="button button-primary"
               onClick={() => openAuth(true)}
@@ -771,6 +852,7 @@ function App() {
           <div className="steps">
             <div className="step">
               <span>01</span>
+
               <div>
                 <h3>Create your account</h3>
                 <p>Register with your email and hostel room details.</p>
@@ -779,6 +861,7 @@ function App() {
 
             <div className="step">
               <span>02</span>
+
               <div>
                 <h3>Connect Telegram</h3>
                 <p>Link your Telegram account for security notifications.</p>
@@ -787,11 +870,12 @@ function App() {
 
             <div className="step">
               <span>03</span>
+
               <div>
-                <h3>Set up the Windows app</h3>
+                <h3>Install the desktop app</h3>
                 <p>
-                  Install the app, check your camera and arm your room when
-                  you leave.
+                  Download the Windows or macOS version, check your
+                  camera and arm your room when you leave.
                 </p>
               </div>
             </div>
@@ -800,11 +884,13 @@ function App() {
 
         <section className="closing-cta">
           <p className="eyebrow">NITA JARVIS / STUDENT ACCESS</p>
+
           <h2>
             Make your room
             <br />
             <span>smarter to protect.</span>
           </h2>
+
           <button
             className="button button-primary button-large"
             onClick={() => openAuth(true)}
@@ -817,7 +903,10 @@ function App() {
       <footer className="site-footer">
         <span>© 2026 NITA JARVIS</span>
         <span>SMART HOSTEL SECURITY</span>
-        <button onClick={() => openAuth(false)}>Student login</button>
+
+        <button onClick={() => openAuth(false)}>
+          Student login
+        </button>
       </footer>
     </div>
   );
